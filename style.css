@@ -6,3 +6,15 @@
   max-height: 400px;
   overflow: auto;
 }
+
+.spacer {
+  margin-top: 3rem;
+}
+
+.spacer-small {
+  margin-top: 1rem;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
