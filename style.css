@@ -15,6 +15,6 @@
   margin-top: 1rem;
 }
 
-.icon-button:hover {
+.clickable:hover {
   cursor: pointer;
 }

@@ -14,27 +14,34 @@
     </div>
     <div class="row" ng-controller="ListingsController">
       <div class="col-md-6">
+
+        <!-- Search bar -->
         <div class="input-group" id="searchBar">
           <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
           <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
         </div>
+
         <div class="tableWrapper">
+
+          <!-- Table of listings -->
           <table class="table table-striped table-hover">
             <tr>
               <th>Code</th>
               <th>Building Name</th>
               <th></th>
             </tr>
-            <tr ng-repeat="listing in listings | filter:searchText" ng-click="showDetails($index)">
-              <td>{{ listing.code }}</td>
-              <td>{{ listing.name }}</td>
+            <tr ng-repeat="listing in listings | filter:searchText">
+              <td class="clickable" ng-click="showDetails(listing)">{{ listing.code }}</td>
+              <td class="clickable" ng-click="showDetails(listing)">{{ listing.name }}</td>
               <td>
-                <span class="glyphicon glyphicon-remove icon-button" ng-click="deleteListing(listing)"></span>
+                <span class="glyphicon glyphicon-remove clickable" ng-click="deleteListing(listing)"></span>
               </td>
             </tr>
           </table>
         </div>
-        <form class=spacer ng-submit="addListing(form.code, form.name, form.latitude, form.longitude, form.address)">
+
+        <!-- Form to add listings -->
+        <form class=spacer ng-submit="addListing(form); form = undefined">
           <div class="form-row">
             <div class="col-md-4">
               <label for="input-code">Code</label>
@@ -49,11 +56,11 @@
           <div class="form-row">
             <div class="col-md-6">
               <label for="input-latitude">Latitude</label>
-              <input id="input-latitude" type="text" class="form-control" placeholder="12.34" ng-model="form.latitude">
+              <input id="input-latitude" type="text" class="form-control" placeholder="12.34" ng-model="form.coordinates.latitude">
             </div>
             <div class="col-md-6">
               <label for="input-longitude">Longitude</label>
-              <input id="input-longitude" type="text" class="form-control" placeholder="56.78" ng-model="form.longitude">
+              <input id="input-longitude" type="text" class="form-control" placeholder="56.78" ng-model="form.coordinates.longitude">
             </div>
           </div>
           <div class="form-row">
@@ -72,17 +79,40 @@
           </div>
         </form>
       </div>
+
+      <!-- Show details of selected listing -->
       <div class="col-md-6">
         <div class="jumbotron">
           <h2>Detailed Information</h2>
-          <!-- 
-
-              Include a way to display detailed information about an individual listing:
-                   * consider how to use ng-click within the the table to implement this feature
-
-             -->
+          <div ng-if="!!detailedInfo">
+            <div class="row">
+              <div class="col">
+                Code: {{detailedInfo.code}}
+              </div>
+              <div class="col">
+                Name: {{detailedInfo.name}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                Latitude: {{detailedInfo.coordinates.latitude}}
+              </div>
+              <div class="col">
+                Longitude: {{detailedInfo.coordinates.longitude}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                Address: {{detailedInfo.address}}
+              </div>
+            </div>
+          </div>
+          <div ng-if="!detailedInfo">
+            No listing is currently selected, click on a listing to select it.
+          </div>
         </div>
       </div>
+
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
