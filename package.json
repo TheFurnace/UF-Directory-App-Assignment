@@ -4,7 +4,9 @@
   "description": "Persisting data using MongoDB and Mongoose",
   "main": "index.js",
   "scripts": {
-    "test-schema": "mocha listing.model.test.js"
+    "test-schema": "mocha listing.model.test.js",
+    "save": "node JSONtoMongo.js",
+    "update": "node queries.js"
   },
   "author": "Medhir Bhargava",
   "license": "MIT",
