@@ -10,7 +10,6 @@ var fs = require("fs"),
   config = require("./config"),
   listingArr = require("./listings.json");
 
-console.log;
 /* Connect to your database */
 mongoose.connect(config.db.uri);
 
